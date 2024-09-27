@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Post } from "@/lib/wordpress.d";
-import { cn } from "@/lib/utils";
+import { cn, getLocalImage } from "@/lib/utils";
 
 import {
   getFeaturedMediaById,
   getAuthorById,
   getCategoryById,
 } from "@/lib/wordpress";
+import { get } from "http";
 
 export default async function PostCard({ post }: { post: Post }) {
   const media = await getFeaturedMediaById(post.featured_media);
@@ -19,6 +20,9 @@ export default async function PostCard({ post }: { post: Post }) {
     year: "numeric",
   });
   const category = await getCategoryById(post.categories[0]);
+
+  const imgUrl = getLocalImage(media.source_url);
+  console.log(imgUrl)
 
   return (
     <Link
@@ -32,7 +36,7 @@ export default async function PostCard({ post }: { post: Post }) {
         <div className="h-48 w-full overflow-hidden relative rounded-md border flex items-center justify-center">
           <Image
             className="h-full w-full object-cover"
-            src={media.source_url}
+            src={imgUrl}
             alt={post.title.rendered}
             width={400}
             height={200}

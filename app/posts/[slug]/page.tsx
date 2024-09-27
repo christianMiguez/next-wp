@@ -1,14 +1,16 @@
 import {
+  getAllPosts,
   getPostBySlug,
   getFeaturedMediaById,
   getAuthorById,
   getCategoryById,
 } from "@/lib/wordpress";
 
+
 import { Section, Container, Article, Main } from "@/components/craft";
 import { Metadata } from "next";
 import { badgeVariants } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, getLocalImage } from "@/lib/utils";
 
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
@@ -25,10 +27,23 @@ export async function generateMetadata({
   };
 }
 
+export async function generateStaticParams () {
+  const posts = await getAllPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
 export default async function Page({ params }: { params: { slug: string } }) {
   const post = await getPostBySlug(params.slug);
   const featuredMedia = await getFeaturedMediaById(post.featured_media);
   const author = await getAuthorById(post.author);
+  const mainContent = post.content.rendered;
+
+  // search if there some string 'https://serendipia-wp.ddev.site/wp-content/uploads' and replace it with '/images/uploads'
+  const mainContentWithLocalImages = mainContent.replace(/https:\/\/serendipia-wp.ddev.site\/wp-content\/uploads/g, '/images/uploads');
+
   const date = new Date(post.date).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
@@ -67,11 +82,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {/* eslint-disable-next-line */}
           <img
             className="w-full"
-            src={featuredMedia.source_url}
+            src={getLocalImage(featuredMedia.source_url)}
             alt={post.title.rendered}
           />
         </div>
-        <Article dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+        <Article dangerouslySetInnerHTML={{ __html: mainContentWithLocalImages }} />
       </Container>
     </Section>
   );

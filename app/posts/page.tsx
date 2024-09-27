@@ -18,6 +18,8 @@ import { Section, Container } from "@/components/craft";
 import PostCard from "@/components/posts/post-card";
 import FilterPosts from "./filter";
 
+export const dynamic = "force-static";
+
 export default async function Page({
   searchParams,
 }: {
@@ -30,7 +32,7 @@ export default async function Page({
   const categories = await getAllCategories();
 
   const page = pageParam ? parseInt(pageParam, 10) : 1;
-  const postsPerPage = 9;
+  const postsPerPage = 100;
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const paginatedPosts = posts.slice(

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Montserrat as FontSans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -26,10 +26,10 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "WordPress & Next.js Starter by 9d8",
+  title: "Espacio Serendipia",
   description:
-    "A starter template for Next.js with WordPress as a headless CMS.",
-  metadataBase: new URL("https://wp.9d8.dev"),
+    "Espacio dedicada a la salud mental y bienestar integral",
+  metadataBase: new URL("https://serendipia.uy"),
 };
 
 // Revalidate content every hour
@@ -41,10 +41,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <head />
       <body
-        className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
+        className={cn("min-h-screen font-sans", fontSans.variable)}
       >
         <ThemeProvider
           attribute="class"
@@ -66,9 +66,9 @@ const Nav = ({ className, children, id }: NavProps) => {
   return (
     <nav
       className={cn(
-        "sticky z-50 top-0 bg-background",
-        "border-b",
+        "sticky z-50 top-0",
         "fade-in",
+        'bg-white',
         className,
       )}
       id={id}
@@ -81,13 +81,13 @@ const Nav = ({ className, children, id }: NavProps) => {
           className="hover:opacity-75 transition-all flex gap-2 items-center"
           href="/"
         >
-          <h2 className="sr-only">next-wp starter</h2>
+          <h2 className="sr-only">Espacio Serendipia</h2>
           <Image
             src={Logo}
             alt="Logo"
             className="dark:invert"
-            width={84}
-            height={30.54}
+            width={178}
+            height={57}
           ></Image>
         </Link>
         {children}
@@ -102,7 +102,7 @@ const Nav = ({ className, children, id }: NavProps) => {
             ))}
           </div>
           <Button asChild className="hidden sm:flex">
-            <Link href="https://github.com/9d8dev/next-wp">Get Started</Link>
+            <Link href="#">Iniciar</Link>
           </Button>
           <MobileNav />
         </div>
@@ -118,7 +118,7 @@ const Footer = () => {
         <Container className="grid md:grid-cols-[1.5fr_0.5fr_0.5fr] gap-12">
           <div className="flex flex-col gap-6 not-prose">
             <Link href="/">
-              <h3 className="sr-only">brijr/components</h3>
+              <h3 className="sr-only">elcacharrero/components</h3>
               <Image
                 src={Logo}
                 alt="Logo"
@@ -159,8 +159,7 @@ const Footer = () => {
         <Container className="border-t not-prose flex flex-col md:flex-row md:gap-2 gap-6 justify-between md:items-center">
           <ThemeToggle />
           <p className="text-muted-foreground">
-            © <a href="https://9d8.dev">9d8</a>. All rights reserved.
-            2024-present.
+            © <a href="https://christianmiguez.com">CHR</a>. Todos los derechos
           </p>
         </Container>
       </Section>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,8 +15,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 270 30% 40%;
+    /* Muted, vintage purple */
+    --primary-foreground: 270 100% 100%;
+    /* Softer, lighter vintage purple */
 
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
@@ -36,33 +40,52 @@
   }
 
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
+    --background: 267 45% 23%;
+    /* Converted #5E3489 to HSL for background */
+    --foreground: 267 100% 95%;
+    /* Light purple for text */
 
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 267 45% 28%;
+    /* Slightly lighter purple for cards */
+    --card-foreground: 267 100% 95%;
+    /* Light purple for card text */
 
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 267 45% 23%;
+    /* Same as background for consistency */
+    --popover-foreground: 267 100% 95%;
+    /* Light purple for popovers */
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 267 100% 80%;
+    /* Light purple-indigo for primary elements */
+    --primary-foreground: 267 45% 20%;
+    /* Dark purple for text on primary */
 
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 267 45% 35%;
+    /* Medium purple for secondary elements */
+    --secondary-foreground: 267 100% 95%;
+    /* Light purple-indigo for secondary text */
 
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted: 267 45% 35%;
+    /* Medium purple for muted elements */
+    --muted-foreground: 267 100% 85%;
+    /* Lighter purple for muted text */
 
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 267 45% 35%;
+    /* Medium purple for accent elements */
+    --accent-foreground: 267 100% 95%;
+    /* Light purple for accent text */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 340 65% 35%;
+    /* Keeping a purple-red for destructive elements */
+    --destructive-foreground: 0 100% 98%;
+    /* Light for destructive text */
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --border: 267 45% 35%;
+    /* Medium purple for borders */
+    --input: 267 45% 35%;
+    /* Same as borders for inputs */
+    --ring: 267 100% 85%;
+    /* Light purple for focus rings */
   }
 }
 
@@ -76,11 +99,15 @@
   }
 }
 
-@layer prose-m-none {
-  * {
-    @apply prose-headings:m-0;
-  }
+
+h2,
+h3,
+h4 {
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
+
 
 @layer utilities {
 
@@ -129,4 +156,9 @@
     filter: blur(0px);
     opacity: 1;
   }
+}
+
+body {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, rgb(244, 202, 255) 0%, rgba(255, 255, 255, 1) 2%, rgba(255, 255, 255, 1) 90%, rgb(228, 181, 240) 100%);
 }
